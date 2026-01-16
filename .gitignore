@@ -1,0 +1,3 @@
+model/Dataset/
+model/.venv/
+frontend/node_modules
