@@ -3,3 +3,4 @@ model/.venv/
 frontend/node_modules
 model/brainwave_processed_data.csv
 model/signvision_model_v3.h5
+frontend/node_modules
