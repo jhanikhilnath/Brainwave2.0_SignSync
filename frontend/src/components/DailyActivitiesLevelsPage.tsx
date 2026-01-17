@@ -1,27 +1,39 @@
-import { Lock, Star, Play, Check, ArrowLeft, Brain } from 'lucide-react';
+import { Lock, Star, Play, Check, ArrowLeft } from 'lucide-react';
 import journeyBg from '@/assets/journey-bg.jpg';
 
-interface AlphabetLevelsPageProps {
+interface DailyActivitiesLevelsPageProps {
     onStartLesson: (lessonId: number, lessonTitle: string) => void;
     onBack: () => void;
 }
 
-export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPageProps) {
-    // Path positions for the 5 nodes (winding upwards)
+export function DailyActivitiesLevelsPage({ onStartLesson, onBack }: DailyActivitiesLevelsPageProps) {
+    // Path positions for 11 daily activities
     const pathPositions = [
-        { top: '85%', left: '50%' }, // 1. Vowels (Start)
-        { top: '70%', left: '25%' }, // 2. Everyday Consonants
-        { top: '50%', left: '60%' }, // 3. Building Block
-        { top: '35%', left: '35%' }, // 4. Rare Consonants
-        { top: '15%', left: '50%' }, // 5. Quiz (End)
+        { top: '90%', left: '50%' }, // 1
+        { top: '82%', left: '30%' }, // 2
+        { top: '74%', left: '60%' }, // 3
+        { top: '66%', left: '35%' }, // 4
+        { top: '58%', left: '65%' }, // 5
+        { top: '50%', left: '40%' }, // 6
+        { top: '42%', left: '65%' }, // 7
+        { top: '34%', left: '30%' }, // 8
+        { top: '26%', left: '55%' }, // 9
+        { top: '18%', left: '35%' }, // 10
+        { top: '10%', left: '50%' }, // 11
     ];
 
     const lessons = [
-        { id: 11, title: 'Vowels', status: 'completed', stars: 3 },
-        { id: 12, title: 'Everyday Consonants', status: 'in-progress', stars: 0 },
-        { id: 13, title: 'Building Block', status: 'locked', stars: 0 },
-        { id: 14, title: 'Rare Consonants', status: 'locked', stars: 0 },
-        { id: 15, title: 'Alphabet Quiz', status: 'locked', stars: 0, isQuiz: true },
+        { id: 50, title: 'College', status: 'completed', stars: 3 },
+        { id: 51, title: 'Work', status: 'completed', stars: 2 },
+        { id: 52, title: 'Write', status: 'in-progress', stars: 0 },
+        { id: 53, title: 'Call', status: 'locked', stars: 0 },
+        { id: 54, title: 'Pray', status: 'locked', stars: 0 },
+        { id: 55, title: 'Stand', status: 'locked', stars: 0 },
+        { id: 56, title: 'Watch', status: 'locked', stars: 0 },
+        { id: 57, title: 'Hang', status: 'locked', stars: 0 },
+        { id: 58, title: 'Become', status: 'locked', stars: 0 },
+        { id: 59, title: 'Assistance', status: 'locked', stars: 0 },
+        { id: 60, title: 'Camp', status: 'locked', stars: 0 },
     ];
 
     return (
@@ -34,8 +46,8 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                         GUIDE
                     </h3>
                     <p className="text-gray-200 font-medium leading-relaxed font-[VT323] text-xl">
-                        Welcome, Explorer! <br /><br />
-                        Follow the winding path to master the alphabet. Start at the bottom and climb your way to the top!
+                        Day in the Life! <br /><br />
+                        Master the signs for your daily routine and activities.
                     </p>
                     <div className="absolute -right-4 top-10 w-8 h-8 bg-primary/20 backdrop-blur-md rounded-full border border-white/10"></div>
                     <div className="absolute -right-2 top-14 w-6 h-6 bg-primary/20 backdrop-blur-md rounded-full border border-white/10"></div>
@@ -44,7 +56,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
 
             {/* Center - Map Area */}
             <div className="flex-1 relative h-full overflow-y-auto no-scrollbar">
-                <div className="max-w-[600px] mx-auto relative pb-32 min-h-full">
+                <div className="w-full relative pb-32 min-h-full">
 
                     {/* Back Button Overlay */}
                     <button
@@ -58,7 +70,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                     {/* Header Overlay */}
                     <div className="absolute top-4 right-0 left-0 text-center z-10 pointer-events-none">
                         <h1 className="text-2xl md:text-3xl text-primary font-bold drop-shadow-[2px_2px_0_#000]" style={{ fontFamily: '"Press Start 2P"' }}>
-                            ALPHABET QUEST
+                            DAILY QUEST
                         </h1>
                     </div>
 
@@ -75,7 +87,6 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                         const isLocked = lesson.status === 'locked';
                         const isCompleted = lesson.status === 'completed';
                         const isCurrent = lesson.status === 'in-progress';
-                        const isQuiz = lesson.isQuiz;
 
                         return (
                             <div
@@ -93,9 +104,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                             ? 'bg-muted border-gray-600 cursor-not-allowed grayscale'
                                             : isCompleted
                                                 ? 'bg-primary border-white hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(255,208,38,0.6)]'
-                                                : isQuiz
-                                                    ? 'bg-red-500 border-white hover:scale-110 animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.6)]'
-                                                    : 'bg-accent border-white hover:scale-110 animate-bounce-slow shadow-[0_0_20px_rgba(59,130,246,0.6)]'
+                                                : 'bg-accent border-white hover:scale-110 animate-bounce-slow shadow-[0_0_20px_rgba(59,130,246,0.6)]'
                                         }
                         `}
                                 >
@@ -103,8 +112,6 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                         <Check className="w-8 h-8 md:w-10 md:h-10 text-black" />
                                     ) : isLocked ? (
                                         <Lock className="w-6 h-6 md:w-8 md:h-8 text-black/50" />
-                                    ) : isQuiz ? (
-                                        <Brain className="w-8 h-8 md:w-10 md:h-10 text-white" />
                                     ) : (
                                         <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
                                     )}
@@ -133,9 +140,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                             ? 'bg-black/50 text-gray-400 border-gray-600 backdrop-blur-sm'
                                             : isCurrent
                                                 ? 'bg-accent/80 text-white border-white backdrop-blur-md shadow-lg'
-                                                : isQuiz
-                                                    ? 'bg-red-900/80 text-white border-white backdrop-blur-md shadow-lg'
-                                                    : 'bg-black/50 text-white border-white/30 backdrop-blur-sm'
+                                                : 'bg-black/50 text-white border-white/30 backdrop-blur-sm'
                                         }
                         `}
                                 >
@@ -155,11 +160,11 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                     <h3 className="text-gray-400 text-sm font-bold uppercase mb-4">Current Session</h3>
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-white">XP Gained</span>
-                        <span className="text-primary font-bold">120 XP</span>
+                        <span className="text-primary font-bold">160 XP</span>
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-white">Streak</span>
-                        <span className="text-orange-500 font-bold">12 Days</span>
+                        <span className="text-orange-500 font-bold">13 Days</span>
                     </div>
                 </div>
 
@@ -171,15 +176,15 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                     <h3 className="text-primary text-sm font-bold uppercase mb-2 flex items-center gap-2 relative z-10">
                         <Star className="w-4 h-4 fill-primary" /> Daily Quest
                     </h3>
-                    <p className="text-white text-lg mb-4 font-[VT323] relative z-10">Complete 2 Lessons</p>
+                    <p className="text-white text-lg mb-4 font-[VT323] relative z-10">Complete 4 Lessons</p>
 
                     {/* Progress Bar Container */}
                     <div className="w-full bg-black/40 h-3 rounded-full overflow-hidden relative z-10">
                         {/* Fill */}
-                        <div className="bg-green-500 h-full w-[40%] shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                        <div className="bg-green-500 h-full w-[80%] shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
                     </div>
                     <div className="flex justify-between mt-2 text-xs text-gray-400 font-bold relative z-10">
-                        <span>2 / 5 XP</span>
+                        <span>4 / 5 XP</span>
                         <span>REWARD: 50 GEMS</span>
                     </div>
                 </div>

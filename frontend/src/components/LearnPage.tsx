@@ -1,5 +1,5 @@
 import { Lock, Star, Play, Check } from 'lucide-react';
-import junglePath from '@/assets/jungle-path.jpg';
+import journeyBg from '@/assets/journey-bg.jpg';
 
 interface LearnPageProps {
   onStartLesson: (lessonId: number, lessonTitle: string) => void;
@@ -17,11 +17,11 @@ export function LearnPage({ onStartLesson }: LearnPageProps) {
 
   const lessons = [
     { id: 1, title: 'Alphabet Signs', status: 'completed', stars: 3 },
-    { id: 2, title: 'Numbers 0-100', status: 'completed', stars: 2 },
-    { id: 3, title: 'Basic Greetings', status: 'in-progress', stars: 0 },
-    { id: 4, title: 'Family Members', status: 'locked', stars: 0 },
-    { id: 5, title: 'Daily Activities', status: 'locked', stars: 0 },
-    { id: 6, title: 'Food & Drinks', status: 'locked', stars: 0 },
+    { id: 2, title: 'Numbers(0-9)', status: 'completed', stars: 2 },
+    { id: 3, title: 'Basic Greetings and Phrases', status: 'in-progress', stars: 0 },
+    { id: 4, title: 'Social Relationships', status: 'in-progress', stars: 0 },
+    { id: 5, title: 'Daily Activities', status: 'in-progress', stars: 0 },
+    { id: 6, title: 'Food & Drinks', status: 'in-progress', stars: 0 },
   ];
 
   return (
@@ -48,7 +48,7 @@ export function LearnPage({ onStartLesson }: LearnPageProps) {
         <div className="max-w-[600px] mx-auto relative pb-32 min-h-full">
           {/* Background Map Image */}
           <img
-            src={junglePath}
+            src={journeyBg}
             alt="Jungle Path Map"
             className="w-full h-auto block select-none pointer-events-none"
           />
@@ -96,8 +96,8 @@ export function LearnPage({ onStartLesson }: LearnPageProps) {
                       <Star
                         key={i}
                         className={`w-4 h-4 md:w-5 md:h-5 ${i < lesson.stars
-                            ? 'text-primary fill-primary drop-shadow-md'
-                            : 'text-muted fill-muted'
+                          ? 'text-primary fill-primary drop-shadow-md'
+                          : 'text-muted fill-muted'
                           }`}
                       />
                     ))}

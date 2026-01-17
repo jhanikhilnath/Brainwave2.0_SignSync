@@ -1,27 +1,37 @@
 import { Lock, Star, Play, Check, ArrowLeft, Brain } from 'lucide-react';
 import journeyBg from '@/assets/journey-bg.jpg';
 
-interface AlphabetLevelsPageProps {
+interface NumbersLevelsPageProps {
     onStartLesson: (lessonId: number, lessonTitle: string) => void;
     onBack: () => void;
 }
 
-export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPageProps) {
-    // Path positions for the 5 nodes (winding upwards)
+export function NumbersLevelsPage({ onStartLesson, onBack }: NumbersLevelsPageProps) {
+    // Path positions for numbers 0-9 (winding upwards)
     const pathPositions = [
-        { top: '85%', left: '50%' }, // 1. Vowels (Start)
-        { top: '70%', left: '25%' }, // 2. Everyday Consonants
-        { top: '50%', left: '60%' }, // 3. Building Block
-        { top: '35%', left: '35%' }, // 4. Rare Consonants
-        { top: '15%', left: '50%' }, // 5. Quiz (End)
+        { top: '90%', left: '50%' }, // 0
+        { top: '82%', left: '30%' }, // 1
+        { top: '74%', left: '60%' }, // 2
+        { top: '66%', left: '35%' }, // 3
+        { top: '58%', left: '65%' }, // 4
+        { top: '50%', left: '30%' }, // 5
+        { top: '42%', left: '60%' }, // 6
+        { top: '34%', left: '35%' }, // 7
+        { top: '26%', left: '65%' }, // 8
+        { top: '18%', left: '50%' }, // 9
     ];
 
     const lessons = [
-        { id: 11, title: 'Vowels', status: 'completed', stars: 3 },
-        { id: 12, title: 'Everyday Consonants', status: 'in-progress', stars: 0 },
-        { id: 13, title: 'Building Block', status: 'locked', stars: 0 },
-        { id: 14, title: 'Rare Consonants', status: 'locked', stars: 0 },
-        { id: 15, title: 'Alphabet Quiz', status: 'locked', stars: 0, isQuiz: true },
+        { id: 20, title: 'Number 0', status: 'completed', stars: 3 },
+        { id: 21, title: 'Number 1', status: 'completed', stars: 2 },
+        { id: 22, title: 'Number 2', status: 'in-progress', stars: 0 },
+        { id: 23, title: 'Number 3', status: 'locked', stars: 0 },
+        { id: 24, title: 'Number 4', status: 'locked', stars: 0 },
+        { id: 25, title: 'Number 5', status: 'locked', stars: 0 },
+        { id: 26, title: 'Number 6', status: 'locked', stars: 0 },
+        { id: 27, title: 'Number 7', status: 'locked', stars: 0 },
+        { id: 28, title: 'Number 8', status: 'locked', stars: 0 },
+        { id: 29, title: 'Number 9', status: 'locked', stars: 0 },
     ];
 
     return (
@@ -34,8 +44,8 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                         GUIDE
                     </h3>
                     <p className="text-gray-200 font-medium leading-relaxed font-[VT323] text-xl">
-                        Welcome, Explorer! <br /><br />
-                        Follow the winding path to master the alphabet. Start at the bottom and climb your way to the top!
+                        Welcome, Math Wizard! <br /><br />
+                        Count your way to the top. Master the numbers 0-9 to unlock the treasure!
                     </p>
                     <div className="absolute -right-4 top-10 w-8 h-8 bg-primary/20 backdrop-blur-md rounded-full border border-white/10"></div>
                     <div className="absolute -right-2 top-14 w-6 h-6 bg-primary/20 backdrop-blur-md rounded-full border border-white/10"></div>
@@ -58,7 +68,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                     {/* Header Overlay */}
                     <div className="absolute top-4 right-0 left-0 text-center z-10 pointer-events-none">
                         <h1 className="text-2xl md:text-3xl text-primary font-bold drop-shadow-[2px_2px_0_#000]" style={{ fontFamily: '"Press Start 2P"' }}>
-                            ALPHABET QUEST
+                            NUMBER QUEST
                         </h1>
                     </div>
 
@@ -75,7 +85,6 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                         const isLocked = lesson.status === 'locked';
                         const isCompleted = lesson.status === 'completed';
                         const isCurrent = lesson.status === 'in-progress';
-                        const isQuiz = lesson.isQuiz;
 
                         return (
                             <div
@@ -93,9 +102,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                             ? 'bg-muted border-gray-600 cursor-not-allowed grayscale'
                                             : isCompleted
                                                 ? 'bg-primary border-white hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(255,208,38,0.6)]'
-                                                : isQuiz
-                                                    ? 'bg-red-500 border-white hover:scale-110 animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.6)]'
-                                                    : 'bg-accent border-white hover:scale-110 animate-bounce-slow shadow-[0_0_20px_rgba(59,130,246,0.6)]'
+                                                : 'bg-accent border-white hover:scale-110 animate-bounce-slow shadow-[0_0_20px_rgba(59,130,246,0.6)]'
                                         }
                         `}
                                 >
@@ -103,8 +110,6 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                         <Check className="w-8 h-8 md:w-10 md:h-10 text-black" />
                                     ) : isLocked ? (
                                         <Lock className="w-6 h-6 md:w-8 md:h-8 text-black/50" />
-                                    ) : isQuiz ? (
-                                        <Brain className="w-8 h-8 md:w-10 md:h-10 text-white" />
                                     ) : (
                                         <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1" />
                                     )}
@@ -133,9 +138,7 @@ export function AlphabetLevelsPage({ onStartLesson, onBack }: AlphabetLevelsPage
                                             ? 'bg-black/50 text-gray-400 border-gray-600 backdrop-blur-sm'
                                             : isCurrent
                                                 ? 'bg-accent/80 text-white border-white backdrop-blur-md shadow-lg'
-                                                : isQuiz
-                                                    ? 'bg-red-900/80 text-white border-white backdrop-blur-md shadow-lg'
-                                                    : 'bg-black/50 text-white border-white/30 backdrop-blur-sm'
+                                                : 'bg-black/50 text-white border-white/30 backdrop-blur-sm'
                                         }
                         `}
                                 >
