@@ -20,11 +20,11 @@ export function Navbar({ activePage, onPageChange }: NavbarProps) {
       {/* Logo Area */}
       <div className="flex items-center gap-4">
         <div className="w-10 h-10 bg-primary flex items-center justify-center border-4 border-background shadow-pixel">
-          <span className="text-xl">👾</span>
+          <span className="text-2xl font-bold text-black">S</span>
         </div>
         <div className="hidden md:flex flex-col">
           <h1 className="text-lg text-foreground font-bold tracking-tight leading-none font-pixel">
-            ISL<span className="text-primary">QUEST</span>
+            Sign<span className="text-primary">Sync</span>
           </h1>
         </div>
       </div>

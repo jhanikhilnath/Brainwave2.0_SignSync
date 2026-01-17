@@ -121,6 +121,170 @@ const NUMBERS_STEPS = [
   },
 ];
 
+// Everyday consonants (split into everyday and rare as requested)
+const EVERYDAY_CONSONANT_STEPS = [
+  {
+    letter: 'B',
+    title: 'Letter B',
+    description: 'Form the sign for B',
+    image: '',
+  },
+  {
+    letter: 'C',
+    title: 'Letter C',
+    description: 'Form the sign for C',
+    image: '',
+  },
+  {
+    letter: 'D',
+    title: 'Letter D',
+    description: 'Form the sign for D',
+    image: '',
+  },
+  {
+    letter: 'F',
+    title: 'Letter F',
+    description: 'Form the sign for F',
+    image: '',
+  },
+  {
+    letter: 'G',
+    title: 'Letter G',
+    description: 'Form the sign for G',
+    image: '',
+  },
+  {
+    letter: 'H',
+    title: 'Letter H',
+    description: 'Form the sign for H',
+    image: '',
+  },
+  {
+    letter: 'J',
+    title: 'Letter J',
+    description: 'Form the sign for J',
+    image: '',
+  },
+  {
+    letter: 'K',
+    title: 'Letter K',
+    description: 'Form the sign for K',
+    image: '',
+  },
+  {
+    letter: 'L',
+    title: 'Letter L',
+    description: 'Form the sign for L',
+    image: '',
+  },
+  {
+    letter: 'M',
+    title: 'Letter M',
+    description: 'Form the sign for M',
+    image: '',
+  },
+  {
+    letter: 'N',
+    title: 'Letter N',
+    description: 'Form the sign for N',
+    image: '',
+  },
+  {
+    letter: 'P',
+    title: 'Letter P',
+    description: 'Form the sign for P',
+    image: '',
+  },
+  {
+    letter: 'R',
+    title: 'Letter R',
+    description: 'Form the sign for R',
+    image: '',
+  },
+  {
+    letter: 'S',
+    title: 'Letter S',
+    description: 'Form the sign for S',
+    image: '',
+  },
+  {
+    letter: 'T',
+    title: 'Letter T',
+    description: 'Form the sign for T',
+    image: '',
+  },
+  {
+    letter: 'Y',
+    title: 'Letter Y',
+    description: 'Form the sign for Y',
+    image: '',
+  },
+  {
+    letter: 'W',
+    title: 'Letter W',
+    description: 'Form the sign for W',
+    image: '',
+  },
+];
+
+// Rare consonants
+const RARE_CONSONANT_STEPS = [
+  {
+    letter: 'Q',
+    title: 'Letter Q',
+    description: 'Form the sign for Q',
+    image: '',
+  },
+  {
+    letter: 'V',
+    title: 'Letter V',
+    description: 'Form the sign for V',
+    image: '',
+  },
+  {
+    letter: 'X',
+    title: 'Letter X',
+    description: 'Form the sign for X',
+    image: '',
+  },
+  {
+    letter: 'Z',
+    title: 'Letter Z',
+    description: 'Form the sign for Z',
+    image: '',
+  },
+];
+
+// Daily Activities multi-step playback (includes College and Work as requested)
+const DAILY_STEPS = [
+  {
+    letter: 'College',
+    title: 'College',
+    description: 'Sign for College',
+    image: '',
+  },
+  { letter: 'Work', title: 'Work', description: 'Sign for Work', image: '' },
+  { letter: 'Write', title: 'Write', description: 'Sign for Write', image: '' },
+  { letter: 'Call', title: 'Call', description: 'Sign for Call', image: '' },
+  { letter: 'Pray', title: 'Pray', description: 'Sign for Pray', image: '' },
+  { letter: 'Stand', title: 'Stand', description: 'Sign for Stand', image: '' },
+  { letter: 'Watch', title: 'Watch', description: 'Sign for Watch', image: '' },
+  { letter: 'Hang', title: 'Hang', description: 'Sign for Hang', image: '' },
+  {
+    letter: 'Become',
+    title: 'Become',
+    description: 'Sign for Become',
+    image: '',
+  },
+  {
+    letter: 'Assistance',
+    title: 'Assistance',
+    description: 'Sign for Assistance',
+    image: '',
+  },
+  { letter: 'Camp', title: 'Camp', description: 'Sign for Camp', image: '' },
+];
+
 export function LessonPage({
   lessonId,
   lessonTitle,
@@ -154,17 +318,27 @@ export function LessonPage({
   const webcamRef = useRef<Webcam>(null);
   const socketRef = useRef<Socket | null>(null);
 
-  // Check if this is a multi-step lesson (Vowels or Numbers)
+  // Check if this is a multi-step lesson (Vowels / Consonants / Daily Activities)
   const isVowelsLesson = lessonId === 11;
-  const isNumbersLesson = lessonId === 12;
-  const isMultiStepLesson = isVowelsLesson || isNumbersLesson;
+  const isEverydayConsonants = lessonId === 12;
+  const isRareConsonants = lessonId === 14;
+  const isDailyActivitiesLesson = lessonId >= 50 && lessonId <= 60;
+  const isMultiStepLesson =
+    isVowelsLesson ||
+    isEverydayConsonants ||
+    isRareConsonants ||
+    isDailyActivitiesLesson;
 
   // Get the appropriate steps array
   const steps = isVowelsLesson
     ? VOWEL_STEPS
-    : isNumbersLesson
-      ? NUMBERS_STEPS
-      : [];
+    : isEverydayConsonants
+      ? EVERYDAY_CONSONANT_STEPS
+      : isRareConsonants
+        ? RARE_CONSONANT_STEPS
+        : isDailyActivitiesLesson
+          ? DAILY_STEPS
+          : [];
   const currentStep = isMultiStepLesson ? steps[currentStepIndex] : null;
 
   const handleNext = () => {
@@ -176,8 +350,11 @@ export function LessonPage({
   };
 
   const handlePrevious = () => {
-    if (isMultiStepLesson && currentStepIndex > 0) {
-      setCurrentStepIndex(prev => prev - 1);
+    if (isMultiStepLesson) {
+      if (currentStepIndex > 0) {
+        setCurrentStepIndex(prev => prev - 1);
+      }
+      // Do NOT call onPrevious() when inside a multi-step lesson — user asked reverse only move one sign.
     } else {
       onPrevious();
     }
@@ -243,6 +420,42 @@ export function LessonPage({
     : targetSign;
   const signAssetUrl = getSignImageUrl(effectiveSignName);
 
+  // Local storage key for per-sign peak scores
+  const PEAK_STORAGE_KEY = 'bw_peak_scores_v1';
+
+  const loadPeakScores = () => {
+    try {
+      const raw = localStorage.getItem(PEAK_STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    } catch (e) {
+      console.error('Failed to load peak scores from localStorage', e);
+      return {};
+    }
+  };
+
+  const savePeakScores = (scores: Record<string, number>) => {
+    try {
+      localStorage.setItem(PEAK_STORAGE_KEY, JSON.stringify(scores));
+    } catch (e) {
+      console.error('Failed to save peak scores to localStorage', e);
+    }
+  };
+
+  const normalizedEffectiveName = (name?: string) =>
+    name ? normalize(name) : null;
+
+  // Load peak for the current sign when it changes, and reset transient success state
+  useEffect(() => {
+    const key = normalizedEffectiveName(effectiveSignName);
+    setIsSuccess(false);
+    if (key) {
+      const scores = loadPeakScores();
+      setPeakScore(scores[key] ?? 0);
+    } else {
+      setPeakScore(0);
+    }
+  }, [effectiveSignName]);
+
   // For multi-step lessons we use the step image in the demo area; for single sign lessons we show the image from assets if available, otherwise fall back to the waving emoji.
   const displayImage = currentStep ? (
     <img
@@ -289,11 +502,23 @@ export function LessonPage({
         // Update Real-time Success State
         // We check if the predicted label matches our effective target
         if (data.label === effectiveTarget) {
-          setIsSuccess(currentConf > 90);
+          const success = currentConf > 90;
+          setIsSuccess(success);
 
-          // Track Highest Score during the recording window
+          // Track Highest Score during the recording window and persist per-sign
           if (isRecording) {
-            setPeakScore(prev => Math.max(prev, currentConf));
+            const key = normalizedEffectiveName(effectiveTarget);
+            if (key) {
+              setPeakScore(prev => {
+                const newPeak = Math.max(prev, currentConf);
+                const scores = loadPeakScores();
+                scores[key] = newPeak;
+                savePeakScores(scores);
+                return newPeak;
+              });
+            } else {
+              setPeakScore(prev => Math.max(prev, currentConf));
+            }
           }
         } else {
           setIsSuccess(false);
@@ -314,6 +539,12 @@ export function LessonPage({
   };
 
   const resetScore = () => {
+    const key = normalizedEffectiveName(effectiveSignName);
+    if (key) {
+      const scores = loadPeakScores();
+      delete scores[key];
+      savePeakScores(scores);
+    }
     setPeakScore(0);
     setPrediction({ label: 'Waiting...', confidence: '0%' });
   };
@@ -361,7 +592,7 @@ export function LessonPage({
           </button>
           <div className='flex-1'>
             <h1 className='text-xl md:text-2xl text-foreground font-bold font-pixel pixel-text-shadow'>
-              {lessonTitle} {isMultiStepLesson && `- ${currentStep?.letter}`}
+              {displayTitle}
             </h1>
             <p className='text-sm text-muted-foreground'>
               BrainWave 2.0 • SignVision 🐒

@@ -46,10 +46,10 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
           <button
             onClick={onGetStarted}
-            className="bg-primary hover:bg-primary/90 text-black text-xl px-12 py-6 flex items-center gap-4 mx-auto rounded-full shadow-[0_0_20px_rgba(255,208,38,0.5)] transition-all hover:scale-105 font-bold"
+            className="bg-primary hover:bg-primary/90 text-black text-lg px-8 py-4 flex items-center gap-3 mx-auto rounded-lg border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-bold font-pixel uppercase"
           >
             <span>Get Started</span>
-            <ArrowRight className="w-6 h-6" />
+            <ArrowRight className="w-5 h-5" />
           </button>
 
           <p className="mt-6 text-sm text-gray-500">Free forever • No credit card required</p>
@@ -99,7 +99,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
         {/* Footer / Decor */}
         <footer className="mt-20 border-t border-white/10 pt-8 w-full max-w-6xl flex justify-between items-center text-gray-500 text-xs">
-          <div>© 2024 ISL Quest. All rights reserved.</div>
+          <div>© 2024 SignSync. All rights reserved.</div>
           <div className="flex gap-4">
             <Star className="w-4 h-4" />
             <span>Built with React & Pixel Love</span>
